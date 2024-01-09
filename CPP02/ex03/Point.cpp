@@ -10,7 +10,7 @@
 
 	} //double float
 
-	Point::Point(const Point &other)
+	Point::Point(const Point &other) : x(Fixed(other.getX().toFloat())), y(Fixed(other.getY().toFloat()))
 	{
 		*this = other;
 		return;
@@ -18,7 +18,7 @@
 
 	bool Point::operator==(const Point &other) const
 	{
-		if(this->x.getRawBits() == x.getRawBits() && this->y.getRawBits() == other.y.getRawBits())
+		if(this->x.getRawBits() == other.x.getRawBits() && this->y.getRawBits() == other.y.getRawBits())
 			return true;
 		return false;
 	}
@@ -36,7 +36,6 @@
 	{
 
 	}
-
 
 	const Fixed Point::getX() const
 	{

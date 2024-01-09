@@ -1,4 +1,5 @@
 #include "Point.hpp"
+#include <iostream>
 
 bool ft_sameSign(float num1, float num2, float num3)
 {

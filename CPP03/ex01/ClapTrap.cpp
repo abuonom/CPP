@@ -2,15 +2,15 @@
 
 ClapTrap::ClapTrap(std::string name) : name(name)
 {
-	this->attackDamage = 0;
-	this->energyPoint = 10;
-	this->hitPoint = 10;
-	std::cout<<"ClapTrap "<<this->name<<"has been created with default constructor"<<std::endl;
+	this->attackDamage = 20;
+	this->energyPoint = 50;
+	this->hitPoint = 100;
+	std::cout<<"ClapTrap "<<this->name<<" has been created with default constructor"<<std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap &toCopy)
 {
 	*this = toCopy;
-	std::cout<<"ClapTrap "<<this->name<<"has been created with copy constructor"<<std::endl;
+	std::cout<<"ClapTrap "<<this->name<<" has been created with copy constructor"<<std::endl;
 	return;
 }
 
@@ -28,7 +28,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &toCopy)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout<<"ClapTrap "<<this->name<<"has been destroyed"<<std::endl;
+	std::cout<<"ClapTrap "<<this->name<<" has been destroyed"<<std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
@@ -68,4 +68,9 @@ void	ClapTrap::beRepaired(unsigned int amount)
 			std::cout<<"ClapTrap "<<this->name<< "is dead"<<std::endl;
 		else
 			std::cout<<"ClapTrap "<<this->name<< "has not energy left for repair itself"<<std::endl;
+}
+
+std::string ClapTrap::getName()
+{
+	return name;
 }

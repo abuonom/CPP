@@ -1,3 +1,5 @@
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 #include "Contact.hpp"
 
 class PhoneBook
@@ -13,3 +15,5 @@ class PhoneBook
 	void searchContact();
 	void printManipulate(std::string text);
 };
+
+#endif

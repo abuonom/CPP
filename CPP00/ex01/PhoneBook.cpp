@@ -69,7 +69,7 @@ void PhoneBook::searchContact()
 	{
 		for(int i = 0; i < this->numberSaved; i++)
 		{
-			std::cout<<i + 1;
+			std::cout<<"         "<<i + 1;
 			std::cout<<"|";
 			printManipulate(this->contacts[i].getFirstName());
 			std::cout<<"|";

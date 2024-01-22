@@ -15,6 +15,6 @@ int main (int argc, char **argv)
 			for (int j = 0; j < (int)temp.length(); j++)
 				std::cout<<(char)std::toupper(temp[j]);
 		}
-	}
 	std::cout<<std::endl;
+	}
 }

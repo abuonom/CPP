@@ -14,7 +14,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &toCopy)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = toCopy;
+	this->setRawBits(toCopy.getRawBits());
 	return;
 }
 

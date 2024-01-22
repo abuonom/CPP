@@ -5,32 +5,27 @@ const int Fixed::fractionalBits = 8;
 Fixed::Fixed()
 {
 	this->fixedValue = 0;
-	std::cout<<"Default constructor called"<<std::endl;
 }
 
 Fixed::Fixed(const Fixed& other)
 {
-	std::cout<<"Copy constructor called"<<std::endl;
 	*this = other;
 	return;
 }
 
 Fixed::Fixed(const int value)
 {
-	std::cout<<"Integer constructor called"<<std::endl;
 	this->fixedValue = value << this->fractionalBits;
 }
 
 Fixed::Fixed(const float value)
 {
 	this->fixedValue = roundf(value * (1 << this->fractionalBits));
-	std::cout<<"Float constructor called"<<std::endl;
 }
 
 
 Fixed &Fixed::operator=(const Fixed &other)
 {
-	std::cout<<"Copy assignment operator called"<<std::endl;
 	if (this != &other)
 		fixedValue = other.fixedValue;
 	return *this;
@@ -38,13 +33,11 @@ Fixed &Fixed::operator=(const Fixed &other)
 
 Fixed::~Fixed()
 {
-	std::cout<<"Destructor called"<<std::endl;
 }
 
 
 int Fixed::getRawBits( void ) const
 {
-	std::cout<<"getRawBits member function called"<<std::endl;
 	return (this->fixedValue);
 }
 
@@ -110,5 +103,121 @@ std::ostream& operator<<(std::ostream& output, const Fixed& c)
 	output<<c.toFloat();
 	return output;
 }
+
+Fixed &Fixed::operator++()
+{
+	int tmp;
+
+	tmp = this->getRawBits();
+	this->setRawBits(++tmp);
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed	ret;
+	int	tmp;
+
+	ret = *this;
+	tmp = this->getRawBits();
+	this->setRawBits(++tmp);
+	return ret;
+}
+
+Fixed &Fixed::operator--()
+{
+	int tmp;
+
+	tmp = this->getRawBits();
+	this->setRawBits(--tmp);
+	return (*this);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed	ret;
+	int	tmp;
+
+	ret = *this;
+	tmp = this->getRawBits();
+	this->setRawBits(--tmp);
+	return ret;
+}
+
+Fixed Fixed::operator+(const Fixed &other)
+{
+	// Creazione di un oggetto Fixed per contenere il risultato della somma
+	Fixed result;
+
+	// Impostazione del valore grezzo (raw bits) del risultato
+	result.setRawBits(this->getRawBits() + other.getRawBits());
+
+	// Restituzione del risultato
+	return result;
+}
+
+Fixed Fixed::operator-(const Fixed &other)
+{
+	Fixed result;
+	int sum = this->getRawBits() - other.getRawBits();
+	result.setRawBits(sum);
+	return result;
+}
+
+Fixed Fixed::operator*(const Fixed &other)
+{
+	Fixed result;
+
+	// Moltiplica i valori grezzi (raw bits) dei due oggetti Fixed
+	long long multiplication = static_cast<long long>(this->getRawBits()) * other.getRawBits();
+
+	// Shifta a destra il risultato per mantenere la rappresentazione a punto fisso corretta
+	multiplication >>= fractionalBits;
+
+	// Imposta il valore grezzo (raw bits) del risultato
+	result.setRawBits(static_cast<int>(multiplication));
+
+	return result;
+}
+
+Fixed Fixed::operator/(const Fixed &other)
+{
+	Fixed result;
+
+	if (other.getRawBits() == 0)
+	{
+		std::cout << "Invalid operation" << std::endl;
+		exit(1);
+	}
+	// Esegue uno shift a sinistra del valore grezzo dell'istanza corrente
+	// Prima della divisione per mantenere la rappresentazione corretta a punto fisso
+	long long division = (static_cast<long long>(this->getRawBits()) << fractionalBits) / other.getRawBits();
+
+	// Imposta il valore grezzo (raw bits) del risultato
+	result.setRawBits(static_cast<int>(division));
+
+	return result;
+}
+
+const Fixed &Fixed::min(const Fixed &fixedOne,const Fixed &fixedTwo)
+{
+	return(fixedOne.getRawBits() < fixedTwo.getRawBits() ? fixedOne : fixedTwo);
+}
+
+Fixed &Fixed::min(Fixed &fixedOne, Fixed &fixedTwo)
+{
+	return(fixedOne.getRawBits() < fixedTwo.getRawBits() ? fixedOne : fixedTwo);
+}
+
+const Fixed &Fixed::max(const Fixed &fixedOne,const Fixed &fixedTwo)
+{
+	return(fixedOne.getRawBits() > fixedTwo.getRawBits() ? fixedOne : fixedTwo);
+}
+
+Fixed &Fixed::max(Fixed &fixedOne, Fixed &fixedTwo)
+{
+	return(fixedOne.getRawBits() > fixedTwo.getRawBits() ? fixedOne : fixedTwo);
+}
+
 
 

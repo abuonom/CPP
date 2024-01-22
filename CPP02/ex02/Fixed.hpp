@@ -24,17 +24,24 @@ public:
 	bool	operator<=(const Fixed &other); //overload operatore minore uguale,  mi permette di confrontare due oggetti e sapere se il primo è più piccolo o uguale al secondo
 	bool	operator==(const Fixed &other); //overload operatore uguale uguale, mi permette di confrontare due oggetti e sapere se sono uguali
 	bool	operator!=(const Fixed &other); //overload operatore diverso, mi permette di confrontare due oggetti e sapere se sono diversi tra loro
+	Fixed&	operator++(); //overload pre incremento
+	Fixed	operator++(int); //overload post incremento
+	Fixed&	operator--();
+	Fixed	operator--(int);
+	Fixed	operator+(const Fixed &other);
+	Fixed	operator-(const Fixed &other);
+	Fixed	operator*(const Fixed &other);
+	Fixed	operator/(const Fixed &other);
 	Fixed	&operator=(const Fixed &other); // overload dell'operatore copia, mi permette di copiare un oggetto in un altro
+	static const Fixed &min(const Fixed &fixedOne,const Fixed &fixedTwo);
+	static Fixed &min(Fixed &fixedOne, Fixed &fixedTwo);
+	static const Fixed &max(const Fixed &fixedOne,const Fixed &fixedTwo);
+	static Fixed &max(Fixed &fixedOne, Fixed &fixedTwo);
 };
 #endif
 std::ostream& operator<<(std::ostream& output, const Fixed& c);
 
 /*
-•The 4 arithmetic operators: +, -, *, and /.
-•The 4 increment/decrement (pre-increment and post-increment, pre-decrement and
-post-decrement) operators, that will increase or decrease the fixed-point value from
-the smallest representable ε such as 1 + ε > 1.
-Add these four public overloaded member functions to your class:
 •A static member function min that takes as parameters two references on fixed-point
 numbers, and returns a reference to the smallest one.
 •A static member function min that takes as parameters two references to constant

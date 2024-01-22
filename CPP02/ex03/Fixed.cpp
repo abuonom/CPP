@@ -100,28 +100,42 @@ bool Fixed::operator!=(const Fixed &other)
 
 Fixed &Fixed::operator++()
 {
-	fixedValue += 1 << fractionalBits;
+	int tmp;
+
+	tmp = this->getRawBits();
+	this->setRawBits(++tmp);
 	return (*this);
 }
 
 Fixed Fixed::operator++(int)
 {
-	Fixed temp = *this;
-	++(this->fixedValue);
-	return (temp);
+	Fixed	ret;
+	int	tmp;
+
+	ret = *this;
+	tmp = this->getRawBits();
+	this->setRawBits(++tmp);
+	return ret;
 }
 
 Fixed &Fixed::operator--()
 {
-	fixedValue -= 1 << fractionalBits;
+	int tmp;
+
+	tmp = this->getRawBits();
+	this->setRawBits(--tmp);
 	return (*this);
 }
 
 Fixed Fixed::operator--(int)
 {
-	Fixed temp = *this;
-	--(this->fixedValue);
-	return (temp);
+	Fixed	ret;
+	int	tmp;
+
+	ret = *this;
+	tmp = this->getRawBits();
+	this->setRawBits(--tmp);
+	return ret;
 }
 
 Fixed Fixed::operator+(const Fixed &other)
@@ -129,11 +143,8 @@ Fixed Fixed::operator+(const Fixed &other)
 	// Creazione di un oggetto Fixed per contenere il risultato della somma
 	Fixed result;
 
-	// Somma dei valori grezzi (raw bits) dell'istanza corrente e dell'oggetto passato come parametro
-	int sum = this->getRawBits() + other.getRawBits();
-
 	// Impostazione del valore grezzo (raw bits) del risultato
-	result.setRawBits(sum);
+	result.setRawBits(this->getRawBits() + other.getRawBits());
 
 	// Restituzione del risultato
 	return result;
@@ -167,6 +178,11 @@ Fixed Fixed::operator/(const Fixed &other)
 {
 	Fixed result;
 
+	if (other.getRawBits() == 0)
+	{
+		std::cout << "Invalid operation" << std::endl;
+		exit(1);
+	}
 	// Esegue uno shift a sinistra del valore grezzo dell'istanza corrente
 	// Prima della divisione per mantenere la rappresentazione corretta a punto fisso
 	long long division = (static_cast<long long>(this->getRawBits()) << fractionalBits) / other.getRawBits();

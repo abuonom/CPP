@@ -19,27 +19,27 @@ void PhoneBook::addNewContact()
 	std::string phoneNumber;
 	std::string darkestSecret;
 
-	while(firstName.empty())
+	while(firstName.empty() && std::cin != false)
 	{
 		std::cout<<"Insert Fist Name:\n";
 		std::cin>>firstName;
 	}
-	while(lastName.empty())
+	while(lastName.empty() && std::cin != false)
 	{
 		std::cout<<"Insert Last Name:\n";
 		std::cin>>lastName;
 	}
-	while(nickName.empty())
+	while(nickName.empty() && std::cin != false)
 	{
 		std::cout<<"Insert Nick Name:\n";
 		std::cin>>nickName;
 	}
-	while(phoneNumber.empty())
+	while(phoneNumber.empty() && std::cin != false)
 	{
 		std::cout<<"Insert Phone Number:\n";
 		std::cin>>phoneNumber;
 	}
-	while(darkestSecret.empty())
+	while(darkestSecret.empty() && std::cin != false)
 	{
 		std::cout<<"Insert darkest secret:\n";
 		std::cin>>darkestSecret;
@@ -80,6 +80,8 @@ void PhoneBook::searchContact()
 		}
 		std::cout<<"Insert index:\n";
 		std::cin>>index;
+		if(std::cin == false)
+			return ;
 		if(index > this->numberSaved || index <= 0)
 			std::cout<<"Inserire un indice corretto\n";
 		else

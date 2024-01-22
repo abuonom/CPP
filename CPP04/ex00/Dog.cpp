@@ -21,6 +21,7 @@ Dog& Dog::operator=(const Dog &tocopy)
 
 Dog::~Dog()
 {
+	cout<<"Dog destructor called"<<endl;
 }
 
 void Dog::makeSound() const

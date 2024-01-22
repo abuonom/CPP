@@ -20,7 +20,6 @@ Animal& Animal::operator=(const Animal &tocopy)
 
 Animal::~Animal()
 {
-	cout<<"Animal destructor called"<<endl;
 }
 
 void Animal::makeSound() const

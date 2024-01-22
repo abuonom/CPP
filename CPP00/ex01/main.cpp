@@ -6,9 +6,10 @@ int main()
 	PhoneBook phonebook = PhoneBook();
 
 	std::cout<<"Welcome to the PhoneBook\n";
-	while(input.compare("EXIT"))
+	while(input.compare("EXIT") && std::cin != false)
 	{
 		std::cout<<"Insert ADD / SEARCH / EXIT\n";
+		std::cin.clear();
 		std::cin >> input;
 		if(!input.compare("ADD"))
 		{

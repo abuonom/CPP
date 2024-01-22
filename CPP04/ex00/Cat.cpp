@@ -20,6 +20,7 @@ Cat& Cat::operator=(const Cat &tocopy)
 
 Cat::~Cat()
 {
+	cout<<"Cat destructor called"<<endl;
 }
 
 void Cat::makeSound() const

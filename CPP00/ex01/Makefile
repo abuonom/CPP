@@ -4,7 +4,7 @@ SRC = $(wildcard *.cpp)
 
 OBJS = $(SRC:.cpp=.o)
 
-FLAGS := -Wall -Werror -Wextra -std=c++98
+FLAGS := -Wall -Werror -Wextra --std=c++98
 
 #COLORS
 RED = \033[1;31m

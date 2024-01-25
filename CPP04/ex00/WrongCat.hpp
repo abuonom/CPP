@@ -5,15 +5,10 @@
 # include <string>
 # include <iostream>
 
-using std::string;
-using std::cout;
-using std::endl;
-
-
 class WrongCat : public WrongAnimal
 {
 protected:
-	string type;
+	std::string type;
 public:
 	WrongCat();
 	WrongCat(const WrongCat &toCopy);

@@ -6,11 +6,6 @@
 # include "Animal.hpp"
 #include  "Brain.hpp"
 
-using std::string;
-using std::cout;
-using std::endl;
-
-
 class Dog : public Animal
 {
 private:

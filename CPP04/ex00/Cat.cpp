@@ -9,7 +9,7 @@ Cat::Cat(const Cat &toCopy) : Animal(toCopy)
 {
 	if(this != &toCopy)
 		*this = toCopy;
-	cout<<"Cat created with copy constructor"<<endl;
+	std::cout<<"Cat created with copy constructor"<<endl;
 }
 
 Cat& Cat::operator=(const Cat &tocopy)
@@ -20,12 +20,12 @@ Cat& Cat::operator=(const Cat &tocopy)
 
 Cat::~Cat()
 {
-	cout<<"Cat destructor called"<<endl;
+	std::cout<<"Cat destructor called"<<endl;
 }
 
 void Cat::makeSound() const
 {
-	cout<<"Meow Meow"<<std::endl;
+	std::cout<<"Meow Meow"<<std::endl;
 }
 
 string Cat::getType() const

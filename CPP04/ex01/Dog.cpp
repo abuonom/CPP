@@ -4,14 +4,14 @@ Dog::Dog(/* args */)
 {
 	this->type = "Dog";
 	this->brain = new Brain();
-	cout << "Dog created with default constructor" << endl;
+	std::cout << "Dog created with default constructor" << std::endl;
 }
 
 // Costruttore di copia profonda
 Dog::Dog(const Dog &toCopy) : Animal(toCopy)
 {
 	this->brain = new Brain(*toCopy.brain);
-	cout << "Dog created with copy constructor" << endl;
+	std::cout << "Dog created with copy constructor" << std::endl;
 }
 
 // Operatore di assegnazione profonda
@@ -35,15 +35,15 @@ Dog &Dog::operator=(const Dog &tocopy)
 Dog::~Dog()
 {
 	delete brain;
-	cout << "Dog destructor called" << endl;
+	std::cout << "Dog destructor called" << std::endl;
 }
 
 void Dog::makeSound() const
 {
-	cout << "Bau Bau" << std::endl;
+	std::cout << "Bau Bau" << std::endl;
 }
 
-string Dog::getType() const
+std::string Dog::getType() const
 {
 	return this->type;
 }

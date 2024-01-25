@@ -10,7 +10,7 @@ Dog::Dog(const Dog &toCopy) : Animal(toCopy)
 {
 	if(this != &toCopy)
 		*this = toCopy;
-	cout<<"Dog created with copy constructor"<<endl;
+	std::cout<<"Dog created with copy constructor"<<std::endl;
 }
 
 Dog& Dog::operator=(const Dog &tocopy)
@@ -21,12 +21,12 @@ Dog& Dog::operator=(const Dog &tocopy)
 
 Dog::~Dog()
 {
-	cout<<"Dog destructor called"<<endl;
+	std::cout<<"Dog destructor called"<<std::endl;
 }
 
 void Dog::makeSound() const
 {
-	cout<<"Bau Bau"<<std::endl;
+	std::cout<<"Bau Bau"<<std::endl;
 }
 
 string Dog::getType() const

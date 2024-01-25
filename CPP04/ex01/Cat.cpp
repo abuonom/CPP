@@ -4,13 +4,13 @@ Cat::Cat(/* args */)
 {
 	this->type = "Cat";
 	this->brain = new Brain();
-	cout << "Cat created with default constructor" << endl;
+	std::cout << "Cat created with default constructor" << std::endl;
 }
 
 Cat::Cat(const Cat &toCopy) : Animal(toCopy)
 {
 	this->brain = new Brain(*toCopy.brain);
-	cout << "Cat created with copy constructor" << endl;
+	std::cout << "Cat created with copy constructor" << std::endl;
 }
 
 // Operatore di assegnazione profonda
@@ -34,15 +34,15 @@ Cat &Cat::operator=(const Cat &tocopy)
 Cat::~Cat()
 {
 	delete brain;
-	cout << "Cat destructor called" << endl;
+	std::cout << "Cat destructor called" << std::endl;
 }
 
 void Cat::makeSound() const
 {
-	cout << "Meow Meow" << std::endl;
+	std::cout << "Meow Meow" << std::endl;
 }
 
-string Cat::getType() const
+std::string Cat::getType() const
 {
 	return this->type;
 }

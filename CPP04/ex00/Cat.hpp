@@ -5,15 +5,10 @@
 # include <iostream>
 # include "Animal.hpp"
 
-using std::string;
-using std::cout;
-using std::endl;
-
-
 class Cat : public Animal
 {
 protected:
-	string type;
+	std::string type;
 public:
 	Cat();
 	Cat(const Cat &toCopy);

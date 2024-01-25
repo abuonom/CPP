@@ -9,7 +9,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &toCopy)
 {
 	if(this != &toCopy)
 		*this = toCopy;
-	cout<<"WrongAnimal created with copy constructor"<<endl;
+	std::cout<<"WrongAnimal created with copy constructor"<<std::endl;
 }
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal &tocopy)
@@ -20,12 +20,12 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal &tocopy)
 
 WrongAnimal::~WrongAnimal()
 {
-	cout<<this->type<<" destroyed"<<endl;
+	std::cout<<this->type<<" destroyed"<<std::endl;
 }
 
 void WrongAnimal::makeSound() const
 {
-	cout<<"What Does the Fox Say?"<<std::endl;
+	std::cout<<"What Does the Fox Say?"<<std::endl;
 }
 
 string WrongAnimal::getType() const

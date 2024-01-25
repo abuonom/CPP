@@ -6,17 +6,12 @@
 # include "Animal.hpp"
 # include "Brain.hpp"
 
-using std::string;
-using std::cout;
-using std::endl;
-
-
 class Cat : public Animal
 {
 private:
 	Brain* brain;
 protected:
-	string type;
+	std::string type;
 public:
 	Cat();
 	Cat(const Cat &toCopy);

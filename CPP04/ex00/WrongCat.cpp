@@ -9,7 +9,7 @@ WrongCat::WrongCat(const WrongCat &toCopy) : WrongAnimal(toCopy)
 {
 	if(this != &toCopy)
 		*this = toCopy;
-	cout<<"WrongCat created with copy constructor"<<endl;
+	std::cout<<"WrongCat created with copy constructor"<<std::endl;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat &tocopy)
@@ -24,7 +24,7 @@ WrongCat::~WrongCat()
 
 void WrongCat::makeSound() const
 {
-	cout<<"Meow Meow"<<std::endl;
+	std::cout<<"Meow Meow"<<std::endl;
 }
 
 string WrongCat::getType() const

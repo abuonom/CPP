@@ -9,7 +9,7 @@ Animal::Animal(const Animal &toCopy)
 {
 	if(this != &toCopy)
 		*this = toCopy;
-	cout<<"Animal created with copy constructor"<<endl;
+	std::cout<<"Animal created with copy constructor"<<std::endl;
 }
 
 Animal& Animal::operator=(const Animal &tocopy)
@@ -24,10 +24,10 @@ Animal::~Animal()
 
 void Animal::makeSound() const
 {
-	cout<<"What Does the Fox Say?"<<std::endl;
+	std::cout<<"What Does the Fox Say?"<<std::endl;
 }
 
-string Animal::getType() const
+std::string Animal::getType() const
 {
 	return this->type;
 }

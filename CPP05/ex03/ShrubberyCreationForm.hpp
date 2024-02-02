@@ -3,6 +3,7 @@
 #define SHRUBBERYCREATIONFORM_HPP
 #include "AForm.hpp"
 
+
 // Create a file <target>_shrubbery in the working directory, and writes ASCII trees
 // inside it.
 class ShrubberyCreationForm : public AForm
@@ -19,3 +20,4 @@ public:
 	std::string getTarget() const;
 };
 #endif
+

@@ -5,7 +5,6 @@
 #include <ctime>
 #include <fstream>
 #include <stdlib.h>
-#include <cstdlib> // per la funzione abs
 
 class InvalidDate : public std::exception
 {
@@ -49,7 +48,6 @@ private:
 	std::map<std::string, double> ExchangeData;
 	std::string filename;
 	bool isValidLine(const std::string line);
-	int daysDifference(const std::tm &date1, const std::tm &date2);
 
 public:
 	BitcoinExchange(std::string filename);
@@ -135,16 +133,6 @@ void BitcoinExchange::printExchangeData()
 	}
 }
 
-// Funzione per calcolare la differenza in giorni tra due date
-int BitcoinExchange::daysDifference(const std::tm &date1, const std::tm &date2)
-{
-	const int secondsPerDay = 24 * 60 * 60; // Numero di secondi in un giorno
-	std::time_t time1 = std::mktime(const_cast<std::tm *>(&date1));
-	std::time_t time2 = std::mktime(const_cast<std::tm *>(&date2));
-	int difference = static_cast<int>(std::difftime(time1, time2)); // Differenza in secondi
-	return std::abs(difference / secondsPerDay);					// Converte la differenza in giorni
-}
-
 void BitcoinExchange::PrintResult()
 {
 	std::ifstream file(this->filename.c_str());
@@ -152,7 +140,7 @@ void BitcoinExchange::PrintResult()
 	double rate;
 	if (!file.is_open())
 	{
-		std::cerr << "Impossibile aprire il file!" << std::endl;
+		std::cerr << "Impossibile aprire il file!" << std::endl; // qua devo mette eccezione
 		return;
 	}
 	std::getline(file, linea); // salta la prima linea
@@ -168,45 +156,7 @@ void BitcoinExchange::PrintResult()
 			// Estrai la data e il valore dalla linea
 			std::string date_string = linea.substr(0, separator_pos);
 			std::string value_string = linea.substr(separator_pos + 1);
-
-			// Verifica se la data è presente nella mappa
-			std::map<std::string, double>::iterator it = ExchangeData.find(date_string);
-			if (it != ExchangeData.end())
-			{
-				// Se la data è presente nella mappa, utilizza direttamente il tasso corrispondente
-				rate = atof(value_string.c_str()) * it->second;
-			}
-			else
-			{
-				// Se la data non è presente, trova la data più vicina nella mappa
-				std::string closest_date;
-				double min_difference = std::numeric_limits<double>::max(); // Inizializza con un valore massimo
-
-				for (it = ExchangeData.begin(); it != ExchangeData.end(); ++it)
-				{
-					// Calcola la differenza in giorni tra la data attuale e la data nella mappa
-					std::tm current_tm = {0};
-					std::istringstream date_ss(date_string);
-					date_ss >> std::get_time(&current_tm, "%Y-%m-%d");
-
-					std::tm map_date_tm = {0};
-					std::istringstream map_date_ss(it->first);
-					map_date_ss >> std::get_time(&map_date_tm, "%Y-%m-%d");
-
-					int difference = daysDifference(current_tm, map_date_tm);
-
-					// Se la differenza è minore rispetto alla differenza minima trovata finora, aggiorna la data più vicina e la differenza minima
-					if (difference < min_difference)
-					{
-						closest_date = it->first;
-						min_difference = difference;
-					}
-				}
-
-				// Utilizza il tasso corrispondente alla data più vicina trovata
-				rate = atof(value_string.c_str()) * ExchangeData[closest_date];
-			}
-
+			rate = atof(value_string.c_str()) * ExchangeData[date_string];
 			std::cout << date_string << " => " << value_string << " = " << rate << std::endl;
 		}
 		catch (const std::exception &e)

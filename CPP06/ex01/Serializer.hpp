@@ -13,11 +13,11 @@ Consente inoltre a qualsiasi tipo integrale di essere convertito in qualsiasi ti
 class Serializer
 {
 private:
-public:
 	Serializer(/* args */);
 	~Serializer();
 	Serializer(Serializer const &toCopy);
 	Serializer &operator=(Serializer const &toCopy);
+public:
 	static uintptr_t serialize(Data *ptr);
 	static Data *deserialize(uintptr_t raw);
 };

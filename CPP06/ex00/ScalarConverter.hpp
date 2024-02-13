@@ -22,11 +22,11 @@ class ScalarConverter
 {
 public:
 	static void convert(const std::string &var);
-	ScalarConverter();
-	ScalarConverter(ScalarConverter const &obj);
 	~ScalarConverter(void);
-	ScalarConverter		&operator=(ScalarConverter const &obj);
 private:
+	ScalarConverter		&operator=(ScalarConverter const &obj);
+	ScalarConverter(ScalarConverter const &obj);
+	ScalarConverter();
 	static void convertChar(char c);
 	static void convertInt(int intValue);
 	static void convertFloat(float floatValue);

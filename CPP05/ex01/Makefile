@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = form
 
 SRC = $(wildcard *.cpp)
 

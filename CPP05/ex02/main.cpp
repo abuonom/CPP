@@ -7,11 +7,11 @@
 int main()
 {
 	// Creazione di un bureaucrat e di alcuni form
-	Bureaucrat bureaucrat("John", 50);
+	Bureaucrat bureaucrat("John", 1);
 	Bureaucrat bureaucrat2("Anna",150);
 	ShrubberyCreationForm shrubberyForm("home");
-	RobotomyRequestForm robotomyForm("target");
-	PresidentialPardonForm pardonForm("target");
+	RobotomyRequestForm robotomyForm("Evaluator");
+	PresidentialPardonForm pardonForm("Evaluator");
 
 	// Test di firma e esecuzione dei form
 	try

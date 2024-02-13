@@ -38,17 +38,17 @@ void Identify::identify(Base &p)
 {
 	try
 	{
-		dynamic_cast<A&>(p);
+		(void)dynamic_cast<A&>(p);
 	}
 	catch(const std::exception& e)
 	{
 		try
 		{
-			dynamic_cast<B&>(p);
+			(void)dynamic_cast<B&>(p);
 		}
 		catch(const std::exception& e)
 		{
-			dynamic_cast<C&>(p);
+			(void)dynamic_cast<C&>(p);
 		}
 
 	}

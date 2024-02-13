@@ -38,8 +38,8 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	int successRate = rand() % 2;
 
 	if (successRate == 1)
-		std::cout << "Napoli Napoli Napoli Forza Napoli Napoli Napoli" << target << " has been robotomized successfully" << std::endl;
+		std::cout << "Napoli Napoli Napoli Forza Napoli Napoli Napoli " << target << " has been robotomized successfully" << std::endl;
 	else
-		std::cout << "Napoli Napoli Napoli Forza Napoli Napoli Napoli" << target << " has not been robotomized" << std::endl;
+		std::cout << "Napoli Napoli Napoli Forza Napoli Napoli Napoli " << target << " has not been robotomized" << std::endl;
 }
 

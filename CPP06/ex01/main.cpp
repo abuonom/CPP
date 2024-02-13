@@ -18,6 +18,5 @@ int main()
 	{
 		std::cout << "Serialization or deserialization failed!" << std::endl;
 	}
-
 	return 0;
 }

@@ -17,11 +17,10 @@ int main()
 	// Test di creazione dei form tramite l'oggetto Intern
 	try
 	{
-		AForm *form1 = intern.createForm("presidential", "home");
-		AForm *form2 = intern.createForm("robotomy", "target");
-		AForm *form3 = intern.createForm("shrubbery", "garden");
-		AForm *form4 = intern.createForm("invalidForm", "invalidTarget");
-
+		AForm *form1 = intern.makeForm("presidential", "home");
+		AForm *form2 = intern.makeForm("robotomy", "target");
+		AForm *form3 = intern.makeForm("shrubbery", "garden");
+		AForm *form4 = intern.makeForm("invalidForm", "invalidTarget");
 		// Utilizzare le variabili per evitare il warning di variabile non utilizzata
 		if (form1)
 		{
@@ -32,7 +31,7 @@ int main()
 		if (form3)
 		{
 		}
-		if (form4)
+		if (!form4)
 		{
 		}
 	}

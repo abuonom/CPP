@@ -45,9 +45,10 @@ public:
 class BitcoinExchange
 {
 private:
-	std::map<std::string, double> ExchangeData;
+	std::map<int, double> ExchangeData;
 	std::string filename;
 	bool isValidLine(const std::string line);
+	int convertDate(const std::string &data);
 
 public:
 	BitcoinExchange(std::string filename);
@@ -57,6 +58,23 @@ public:
 	void printValueData();
 	void PrintResult();
 };
+
+int BitcoinExchange::convertDate(const std::string &data)
+{
+	std::string anno = data.substr(0, 4);
+	std::string mese = data.substr(5, 2);
+	std::string giorno = data.substr(8, 2);
+
+	// Costruisci una stringa concatenando anno, mese e giorno
+	std::string dataNumericaString = anno + mese + giorno;
+
+	// Converti la stringa in un intero
+	std::stringstream ss(dataNumericaString);
+	int dataNumerica;
+	ss >> dataNumerica;
+
+	return dataNumerica;
+}
 
 BitcoinExchange::BitcoinExchange(std::string filename)
 {
@@ -84,7 +102,9 @@ void BitcoinExchange::loadExchangeData()
 		std::istringstream ss(linea);
 		std::string data;
 		if (std::getline(ss, data, ',') && ss >> rate)
-			ExchangeData[data] = rate;
+		{
+			ExchangeData[this->convertDate(data)] = rate;
+		}
 		else
 			throw InvalidLine();
 	}
@@ -127,7 +147,7 @@ bool BitcoinExchange::isValidLine(const std::string line)
 void BitcoinExchange::printExchangeData()
 {
 	std::cout << "Exchange Data:" << std::endl;
-	for (std::map<std::string, double>::const_iterator it = ExchangeData.begin(); it != ExchangeData.end(); ++it)
+	for (std::map<int, double>::const_iterator it = ExchangeData.begin(); it != ExchangeData.end(); ++it)
 	{
 		std::cout << "Data: " << it->first << ", Rate: " << it->second << std::endl;
 	}
@@ -154,10 +174,11 @@ void BitcoinExchange::PrintResult()
 				throw InvalidDate();
 
 			// Estrai la data e il valore dalla linea
-			std::string date_string = linea.substr(0, separator_pos);
-			std::string value_string = linea.substr(separator_pos + 1);
-			rate = atof(value_string.c_str()) * ExchangeData[date_string];
-			std::cout << date_string << " => " << value_string << " = " << rate << std::endl;
+			int	date = this->convertDate(linea.substr(0, separator_pos));
+			double value = atof((linea.substr(separator_pos + 1).c_str()));
+			rate = value * ExchangeData[date];
+			std::cout << ExchangeData[date] << std::endl;
+			std::cout << date << " => " << value << " = " << rate << std::endl;
 		}
 		catch (const std::exception &e)
 		{

@@ -49,6 +49,7 @@ private:
 	std::string filename;
 	bool isValidLine(const std::string line);
 	int convertDate(const std::string &data);
+	int findNewDate(int date);
 
 public:
 	BitcoinExchange(std::string filename);
@@ -153,6 +154,19 @@ void BitcoinExchange::printExchangeData()
 	}
 }
 
+int BitcoinExchange::findNewDate(int date)
+{
+	std::map<int, double>::const_reverse_iterator rit;
+	// Itera all'indietro nella mappa per trovare la data più vicina
+	for (rit = ExchangeData.rbegin(); rit != ExchangeData.rend(); ++rit)
+	{
+		if (rit->first < date)
+			return rit->first; // Restituisci la data trovata
+	}
+	// Se non è stata trovata alcuna data precedente, restituisci la data più vecchia disponibile
+	return ExchangeData.begin()->first;
+}
+
 void BitcoinExchange::PrintResult()
 {
 	std::ifstream file(this->filename.c_str());
@@ -172,13 +186,14 @@ void BitcoinExchange::PrintResult()
 			size_t separator_pos = linea.find('|');
 			if (separator_pos == std::string::npos)
 				throw InvalidDate();
-
-			// Estrai la data e il valore dalla linea
-			int	date = this->convertDate(linea.substr(0, separator_pos));
+			int date = this->convertDate(linea.substr(0, separator_pos));
 			double value = atof((linea.substr(separator_pos + 1).c_str()));
+			if (ExchangeData.find(date) == ExchangeData.end())
+				date = this->findNewDate(date);
 			rate = value * ExchangeData[date];
-			std::cout << ExchangeData[date] << std::endl;
-			std::cout << date << " => " << value << " = " << rate << std::endl;
+			std::string dateStr = std::to_string(date);
+			dateStr = dateStr.substr(0, 4) + "-" + dateStr.substr(4, 2) + "-" + dateStr.substr(6, 2);
+			std::cout << dateStr << " => " << value << " = " << rate << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -187,6 +202,14 @@ void BitcoinExchange::PrintResult()
 	}
 }
 
+std::string formatDate(int dateInt)
+{
+	std::string dateStr = std::to_string(dateInt);
+	// Assicurati che la lunghezza della stringa sia almeno 8
+	dateStr = std::string(8 - dateStr.length(), '0') + dateStr;
+	// Formatta la stringa come YYYY-MM-DD
+	return dateStr.substr(0, 4) + "-" + dateStr.substr(4, 2) + "-" + dateStr.substr(6, 2);
+}
 /*
 
 	 ./btc input.txt

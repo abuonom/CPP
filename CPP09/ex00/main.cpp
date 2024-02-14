@@ -11,7 +11,6 @@ int main(int argc, char **argv)
 	{
 		BitcoinExchange BtEx(argv[1]);
 		BtEx.loadExchangeData();
-		BtEx.printExchangeData();
 		BtEx.PrintResult();
 	}
 	catch (const std::exception &e)

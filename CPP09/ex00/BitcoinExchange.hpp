@@ -80,7 +80,6 @@ int BitcoinExchange::convertDate(const std::string &data)
 BitcoinExchange::BitcoinExchange(std::string filename)
 {
 	this->filename = filename;
-	std::cout << "Costruttore di default richiamato" << std::endl;
 }
 
 BitcoinExchange::~BitcoinExchange()

@@ -5,6 +5,7 @@
 #include <stack>
 #include <cstdlib> // for atoi
 #include <cstring>
+#include <exception>
 
 class rpnException : public std::exception
 {
@@ -27,12 +28,13 @@ class RPN
 {
 private:
 	std::stack<int> num;
-
+	std::string expression;
 public:
-	RPN();
+	RPN(std::string expression);
 	~RPN();
 	RPN(const RPN &toCopy);
 	RPN &operator=(const RPN &toCopy);
+	int operation();
 };
 
 #endif

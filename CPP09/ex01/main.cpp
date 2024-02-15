@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 	try
 	{
 		RPN rpn(argv[1]);
+		std::cout<<rpn.operation()<<std::endl;
 	}
 	catch (const std::exception &e)
 	{

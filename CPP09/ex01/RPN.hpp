@@ -15,12 +15,12 @@ public:
 		return "Error: bad input";
 	}
 };
-class InfException : public std::exception
+class ZeroException : public std::exception
 {
 public:
 	const char *what() const throw()
 	{
-		return "∞";
+		return "N/0 is impossible for me :(";
 	}
 };
 

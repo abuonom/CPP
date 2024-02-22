@@ -6,6 +6,7 @@
 #include <cstdlib> // for atoi
 #include <cstring>
 #include <exception>
+#include <ctime>
 
 class rpnException : public std::exception
 {
@@ -35,6 +36,7 @@ public:
 	RPN(const RPN &toCopy);
 	RPN &operator=(const RPN &toCopy);
 	int operation();
+	clock_t start_t = clock();
 };
 
 #endif
